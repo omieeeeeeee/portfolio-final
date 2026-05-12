@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Noc | Premium Web Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:#181818}
+body{background:#181818;color:#fff;font-family:'Syne',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:#181818}::-webkit-scrollbar-thumb{background:#8B1020}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;background:rgba(24,24,24,0.8);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.07);transition:background .35s}
+nav.scrolled{background:rgba(24,24,24,0.98)}
+.nav-logo{font-size:20px;font-weight:700;color:#fff;letter-spacing:0.01em;cursor:pointer}
+.nav-links{display:flex;gap:36px;align-items:center}
+.nav-link{font-size:13px;font-weight:500;letter-spacing:0.06em;color:rgba(255,255,255,0.55);padding-bottom:4px;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;cursor:pointer}
+.nav-link:hover,.nav-link.active{color:#fff}
+.nav-link.active{border-bottom-color:#8B1020;color:#e87a8a}
+.btn-connect{font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;background:#8B1020;color:#fff;padding:10px 24px;border:none;cursor:pointer;transition:background .2s;white-space:nowrap}
+.btn-connect:hover{background:#a6152a}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:1.5px;background:#fff;transition:transform .3s,opacity .3s}
+.mob-menu{display:none;position:fixed;top:70px;left:0;right:0;z-index:90;background:rgba(18,18,18,0.99);backdrop-filter:blur(20px);padding:28px 40px;flex-direction:column;gap:22px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.mob-menu.open{display:flex}
+.mob-menu .nav-link{font-size:16px}
+
+/* HERO */
+#home{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.h-base{position:absolute;inset:0;background:#181818}
+/* Animated dark fluid waves — subtle */
+.w{position:absolute;filter:blur(60px);opacity:0.06;will-change:transform,border-radius}
+.w1{width:95%;height:75%;top:0%;right:-25%;background:radial-gradient(ellipse,rgba(255,255,255,.9) 0%,transparent 65%);border-radius:38% 62% 52% 48%/48% 38% 62% 52%;animation:wm1 20s ease-in-out infinite}
+.w2{width:75%;height:65%;bottom:-5%;left:-18%;background:radial-gradient(ellipse,rgba(255,255,255,.7) 0%,transparent 65%);border-radius:58% 42% 44% 56%/38% 56% 44% 62%;animation:wm2 24s ease-in-out infinite}
+.w3{width:55%;height:55%;top:25%;left:28%;background:radial-gradient(ellipse,rgba(255,255,255,.5) 0%,transparent 65%);border-radius:48% 52% 38% 62%/58% 42% 56% 44%;animation:wm3 16s ease-in-out infinite}
+.w4{width:42%;height:42%;top:8%;left:5%;background:radial-gradient(ellipse,rgba(255,255,255,.4) 0%,transparent 65%);border-radius:52% 48% 62% 38%/44% 58% 38% 62%;animation:wm4 28s ease-in-out infinite}
+@keyframes wm1{0%,100%{transform:translate(0,0) rotate(0deg);border-radius:38% 62% 52% 48%/48% 38% 62% 52%}25%{transform:translate(-28px,22px) rotate(3deg);border-radius:54% 46% 38% 62%/44% 58% 48% 52%}50%{transform:translate(22px,-26px) rotate(-2deg);border-radius:44% 56% 60% 40%/58% 44% 40% 60%}75%{transform:translate(-12px,30px) rotate(5deg);border-radius:62% 38% 44% 56%/38% 56% 62% 44%}}
+@keyframes wm2{0%,100%{transform:translate(0,0) rotate(0deg);border-radius:58% 42% 44% 56%/38% 56% 44% 62%}33%{transform:translate(26px,-18px) rotate(-4deg);border-radius:44% 56% 62% 38%/56% 44% 38% 62%}66%{transform:translate(-18px,14px) rotate(3deg);border-radius:52% 48% 38% 62%/44% 52% 66% 34%}}
+@keyframes wm3{0%,100%{transform:translate(0,0) scale(1);border-radius:48% 52% 38% 62%/58% 42% 56% 44%}50%{transform:translate(14px,-8px) scale(1.07);border-radius:38% 62% 52% 48%/44% 52% 40% 60%}}
+@keyframes wm4{0%,100%{transform:translate(0,0) rotate(0deg)}40%{transform:translate(18px,24px) rotate(-5deg)}80%{transform:translate(-12px,-18px) rotate(3deg)}}
+.h-content{position:relative;z-index:10;text-align:center;padding:0 40px;max-width:1100px;width:100%}
+.h-title{font-size:clamp(64px,9.5vw,128px);font-weight:800;line-height:1.0;letter-spacing:-0.02em;color:#fff;margin-bottom:22px;animation:fup .9s ease both .1s}
+.h-sub{font-size:clamp(14px,1.2vw,17px);font-weight:400;color:rgba(255,255,255,.5);max-width:540px;margin:0 auto 44px;line-height:1.75;animation:fup .9s ease both .3s}
+.h-btn{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.3);padding:14px 32px;transition:background .25s,border-color .25s;animation:fup .9s ease both .5s;cursor:pointer}
+.h-btn:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.55)}
+@keyframes fup{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+
+/* QUOTE */
+#about{padding:100px 40px 80px;display:grid;grid-template-columns:72px 1fr;gap:0 32px;max-width:1200px;margin:0 auto;align-items:start}
+.q-icon{width:18px;height:18px;background:rgba(255,255,255,.14);margin-top:10px;flex-shrink:0}
+.q-text{font-size:clamp(22px,3vw,36px);font-weight:700;line-height:1.4;color:#fff}
+
+/* PORTFOLIO */
+#portfolio{padding:20px 40px 100px;max-width:1200px;margin:0 auto}
+.sec-title{font-size:clamp(26px,3.5vw,42px);font-weight:700;color:#fff;margin-bottom:30px}
+/* 12-col asymmetric grid */
+.pgrid{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:auto auto auto;gap:14px}
+.cy{grid-column:1/8;grid-row:1}
+.ce{grid-column:8/13;grid-row:1}
+.cr{grid-column:1/5;grid-row:2}
+.cn{grid-column:5/13;grid-row:2}
+.cl{grid-column:1/13;grid-row:3}
+.cwrap{display:flex;flex-direction:column;gap:12px}
+/* Card image container */
+.cimg{
+  display:block;position:relative;overflow:hidden;
+  background-size:cover;background-position:center center;
+  cursor:pointer;transition:transform .55s cubic-bezier(.25,.46,.45,.94);
+}
+.cimg:hover{transform:scale(1.018)}
+.cy .cimg,.ce .cimg{height:460px}
+.cr .cimg,.cn .cimg{height:380px}
+.cl .cimg{height:260px}
+/* Dark matching overlay */
+.cimg::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to top,rgba(0,0,0,0.72) 0%,rgba(0,0,0,0.38) 45%,rgba(0,0,0,0.22) 100%);
+  transition:opacity .35s;
+}
+.cimg:hover::before{opacity:.85}
+.cmeta{position:absolute;bottom:16px;left:18px;z-index:2;display:flex;gap:8px;align-items:center}
+.ctag{font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.28);padding:3px 9px}
+.cyear{font-size:9px;color:rgba(255,255,255,.45);letter-spacing:0.12em}
+.ctitle{font-size:clamp(17px,1.8vw,24px);font-weight:600;color:#fff;padding:0 2px}
+
+/* CONTACT */
+#contact{padding:80px 40px;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1.3fr;gap:60px;align-items:start}
+.cl-head h2{font-size:clamp(48px,6.5vw,88px);font-weight:800;line-height:1.0;letter-spacing:-0.02em;color:#fff;margin-bottom:26px}
+.cl-head p{font-size:14px;color:rgba(255,255,255,.45);line-height:1.85;max-width:370px;margin-bottom:48px}
+.ci-label{font-size:9px;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:6px}
+.ci-val{font-size:clamp(15px,1.4vw,19px);font-weight:600;color:#fff;display:block;margin-bottom:30px}
+.cbox{border:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.2);padding:36px 32px}
+.ffield{border-bottom:1px solid rgba(255,255,255,.12);padding:16px 0 14px;margin-bottom:0}
+.ffield:last-of-type{border-bottom:none;margin-bottom:22px}
+.flabel{font-size:9px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,.32);display:block;margin-bottom:8px}
+.finput,.ftextarea{width:100%;background:none;border:none;outline:none;color:#fff;font-family:'Syne',sans-serif;font-size:14px;font-weight:400;resize:none}
+.finput::placeholder,.ftextarea::placeholder{color:rgba(255,255,255,.18)}
+.fsub{width:100%;background:#8B1020;border:none;color:#fff;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;padding:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .2s}
+.fsub:hover{background:#a6152a}
+
+/* FOOTER */
+footer{border-top:1px solid rgba(255,255,255,.07);padding:28px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;background:#181818}
+.flogo{font-size:24px;font-weight:800;color:#fff;letter-spacing:-0.01em}
+.fcopy{font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,.22)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:0 20px}
+  .nav-links,.btn-connect{display:none!important}
+  .hamburger{display:flex!important}
+  #about{grid-template-columns:36px 1fr;padding:70px 20px 50px;gap:0 20px}
+  #portfolio{padding:16px 20px 70px}
+  .pgrid{grid-template-columns:1fr;gap:0}
+  .cy,.ce,.cr,.cn,.cl{grid-column:1!important;grid-row:auto!important}
+  .cy .cimg,.ce .cimg{height:260px}
+  .cr .cimg,.cn .cimg{height:240px}
+  .cl .cimg{height:200px}
+  #contact{grid-template-columns:1fr;gap:40px;padding:60px 20px}
+  footer{padding:22px 20px}
+  .h-content{padding:0 20px}
+}
+@media(max-width:540px){
+  .h-title{font-size:clamp(50px,13vw,80px)}
+  #about{grid-template-columns:1fr;gap:0;padding:55px 20px 40px}
+  .q-icon{display:none}
+  #contact{padding:50px 20px}
+  footer{padding:20px}
+}
+</style>
+</head>
+<body>
+
+<nav id="nb">
+  <div class="nav-logo" onclick="scrollTo(0,0)">The Noc</div>
+  <div class="nav-links">
+    <a href="#home" class="nav-link active" id="nl-home">HOME</a>
+    <a href="#portfolio" class="nav-link" id="nl-portfolio">PORTFOLIO</a>
+    <a href="#contact" class="nav-link" id="nl-contact">CONTACT</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:14px">
+    <a href="#contact" class="btn-connect">CONNECT</a>
+    <button class="hamburger" id="hbtn" aria-label="Menu">
+      <span id="s1"></span><span id="s2"></span><span id="s3"></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mob-menu" id="mm">
+  <a href="#home" class="nav-link active" onclick="cm()">HOME</a>
+  <a href="#portfolio" class="nav-link" onclick="cm()">PORTFOLIO</a>
+  <a href="#contact" class="nav-link" onclick="cm()">CONTACT</a>
+  <a href="#contact" class="btn-connect" onclick="cm()" style="align-self:flex-start;margin-top:8px">CONNECT</a>
+</div>
+
+<section id="home">
+  <div class="h-base"></div>
+  <div class="w w1"></div><div class="w w2"></div>
+  <div class="w w3"></div><div class="w w4"></div>
+  <div class="h-content">
+    <h1 class="h-title">Crafting digital<br>stillness.</h1>
+    <p class="h-sub">The Noc, a web studio merging intellectual depth with cinematic minimalism for high-end output</p>
+    <a href="#portfolio" class="h-btn">
+      VIEW PORTFOLIO
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v10M7 12l-4-4M7 12l4-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</section>
+
+<section id="about">
+  <div class="q-icon"></div>
+  <p class="q-text">"The Noc is a web design and development studio built for brands that take their presence seriously... let's build something worth seeing."</p>
+</section>
+
+<section id="portfolio">
+  <h2 class="sec-title">Selected Work</h2>
+  <div class="pgrid">
+
+    <!-- Sthira Yoga — WELLNESS cover -->
+    <div class="cwrap cy">
+      <a href="https://sthirayoga.netlify.app/" target="_blank" rel="noopener noreferrer"
+        class="cimg" style="background-image:url('https://codewords-uploads.s3.amazonaws.com/runtime_v2/deb3a8c875a642f0806baf3fe2367970dd3bfab3566a48c8b96fcbde707fb816/Screenshot_2026-05-11_at_11.17.44_PM.png')">
+        <div class="cmeta"><span class="ctag">WELLNESS</span><span class="cyear">2026</span></div>
+      </a>
+      <span class="ctitle">Sthira Yoga Studio</span>
+    </div>
+
+    <!-- The Ember Room — HOSPITALITY cover -->
+    <div class="cwrap ce">
+      <a href="https://emberroom.netlify.app/" target="_blank" rel="noopener noreferrer"
+        class="cimg" style="background-image:url('https://codewords-uploads.s3.amazonaws.com/runtime_v2/bf2c8a4938b64f91bbd5459c5662b7ce43f0e1c3d3ee43658eb6fa2776b78f8f/Screenshot_2026-05-11_at_11.16.39_PM.png')">
+        <div class="cmeta"><span class="ctag">HOSPITALITY</span><span class="cyear">2026</span></div>
+      </a>
+      <span class="ctitle">The Ember Room</span>
+    </div>
+
+    <!-- Rosso Pizzeria — DINING cover -->
+    <div class="cwrap cr">
+      <a href="https://rossopizza.netlify.app/" target="_blank" rel="noopener noreferrer"
+        class="cimg" style="background-image:url('https://codewords-uploads.s3.amazonaws.com/runtime_v2/66e7edabd94548d28a624b3e7c34768d440b444ee7c548a29b16dbdb0b6f53af/Screenshot_2026-05-11_at_11.17.55_PM.png')">
+        <div class="cmeta"><span class="ctag">DINING</span><span class="cyear">2026</span></div>
+      </a>
+      <span class="ctitle">Rosso Pizzeria</span>
+    </div>
+
+    <!-- Niral Skincare — SKINCARE cover -->
+    <div class="cwrap cn">
+      <a href="https://niralskincare.netlify.app/" target="_blank" rel="noopener noreferrer"
+        class="cimg" style="background-image:url('https://codewords-uploads.s3.amazonaws.com/runtime_v2/acc7840391234ef2a353ab3b074186f85941238433b3476c82e6055de731e760/Screenshot_2026-05-11_at_11.17.33_PM.png')">
+        <div class="cmeta"><span class="ctag">SKINCARE</span><span class="cyear">2026</span></div>
+      </a>
+      <span class="ctitle">Niral Skincare</span>
+    </div>
+
+    <!-- Luxe Hair Studio — LIFESTYLE cover (full width) -->
+    <div class="cwrap cl">
+      <a href="https://luxehairstudios.netlify.app/" target="_blank" rel="noopener noreferrer"
+        class="cimg" style="background-image:url('https://codewords-uploads.s3.amazonaws.com/runtime_v2/8afcc3af8030451bbbff3481c6cc088bded1db0478424609a1579b9e0ff30431/Screenshot_2026-05-11_at_11.17.09_PM.png')">
+        <div class="cmeta"><span class="ctag">LIFESTYLE</span><span class="cyear">2026</span></div>
+      </a>
+      <span class="ctitle">Luxe Hair Studio</span>
+    </div>
+
+  </div>
+</section>
+
+<section id="contact">
+  <div class="cl-head">
+    <h2>Let's build.</h2>
+    <p>We partner with ambitious brands to create digital experiences that demand attention. Reach out to discuss your next endeavor.</p>
+    <div class="ci-label">EMAIL</div>
+    <a href="mailto:thenoc.co.in@gmail.com" class="ci-val">thenoc.co.in@gmail.com</a>
+    <div class="ci-label">CONTACT</div>
+    <span class="ci-val">8779277607</span>
+  </div>
+  <div class="cbox">
+    <form action="https://formspree.io/f/xykoljdd" method="POST">
+      <div class="ffield">
+        <label class="flabel">Name</label>
+        <input class="finput" type="text" name="name" required/>
+      </div>
+      <div class="ffield">
+        <label class="flabel">Email Address</label>
+        <input class="finput" type="email" name="email" required/>
+      </div>
+      <div class="ffield" style="min-height:110px">
+        <label class="flabel">Project Details</label>
+        <textarea class="ftextarea" name="project_details" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="fsub">
+        SEND INQUIRY
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M3 7.5h9M12 7.5l-3.5-3.5M12 7.5L8.5 11" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="flogo">The Noc</div>
+  <div class="fcopy">&copy; 2026 THE NOC.CO , ALL RIGHTS RESERVED.</div>
+</footer>
+
+<script>
+var mo=false;
+window.addEventListener('scroll',function(){
+  document.getElementById('nb').classList.toggle('scrolled',window.scrollY>60);
+  var secs=['home','portfolio','contact'],act='home';
+  secs.forEach(function(id){var el=document.getElementById(id);if(el&&window.scrollY>=el.offsetTop-130)act=id;});
+  secs.forEach(function(id){var nl=document.getElementById('nl-'+id);if(nl)nl.classList.toggle('active',id===act);});
+},{passive:true});
+document.getElementById('hbtn').addEventListener('click',function(){
+  mo=!mo;
+  document.getElementById('mm').classList.toggle('open',mo);
+  document.getElementById('s1').style.transform=mo?'rotate(45deg) translate(4px,4.5px)':'';
+  document.getElementById('s2').style.opacity=mo?'0':'1';
+  document.getElementById('s3').style.transform=mo?'rotate(-45deg) translate(4px,-4.5px)':'';
+});
+function cm(){
+  mo=false;document.getElementById('mm').classList.remove('open');
+  document.getElementById('s1').style.transform='';
+  document.getElementById('s2').style.opacity='1';
+  document.getElementById('s3').style.transform='';
+}
+</script>
+</body>
+</html>
